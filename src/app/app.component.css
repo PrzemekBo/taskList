@@ -1,0 +1,11 @@
+.mainClass{
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  height: 500px;
+  margin-left: 35%;
+
+}
+.container{
+
+}
