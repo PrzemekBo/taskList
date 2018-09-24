@@ -6,44 +6,43 @@ import {Task} from '../model/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private tasksList: Array<Task> = [];
-  private tasksDone: Array<Task> = [];
+
 
   private tasksListObs = new BehaviorSubject<Array<Task>>([]);
-  private tasksDoneObs = new BehaviorSubject<Array<Task>>([]);
+
 
   constructor() {
-    console.log('TasksService');
-    this.tasksList = [
-      {name: 'Sprzątanie kuwety', created: new Date()},
-      {name: 'Nauka Angulara', created: new Date()},
-      {name: 'Podlewanie kwiatów', created: new Date()},
-      {name: 'Zakupy', created: new Date()}
+
+    const tasksList = [
+      {name: 'Sprzątanie kuwety', created: new Date().toLocaleString(), isDone: false},
+      {name: 'Nauka Angulara', created: new Date().toLocaleString(), isDone: false},
+      {name: 'Podlewanie kwiatów', created: new Date().toLocaleString(), isDone: false},
+      {name: 'Zakupy', created: new Date().toLocaleString(), isDone: false}
     ];
-    this.tasksListObs.next(this.tasksList);
+    this.tasksListObs.next(tasksList);
   }
 
   add(task: Task) {
-    this.tasksList.push(task);
-    this.tasksListObs.next(this.tasksList);
+    const list = this.tasksListObs.getValue();
+    list.push(task);
+    this.tasksListObs.next(list);
   }
 
   remove(task: Task) {
-    this.tasksList = this.tasksList.filter(e => e !== task);
-    this.tasksListObs.next(this.tasksList);
+    const list = this.tasksListObs.getValue().filter(e => e !== task);
+    this.tasksListObs.next(list);
   }
 
   done(task: Task) {
-    this.tasksDone.push(task);
-    this.remove(task);
-    this.tasksDoneObs.next(this.tasksDone);
+    task.end = new Date().toLocaleString();
+    task.isDone = true;
+    const list = this.tasksListObs.getValue();
+    this.tasksListObs.next(list);
   }
 
   getTasksListObs(): Observable<Array<Task>> {
     return this.tasksListObs.asObservable();
   }
 
-  getTasksDoneObs(): Observable<Array<Task>> {
-    return this.tasksDoneObs.asObservable();
-  }
+
 }

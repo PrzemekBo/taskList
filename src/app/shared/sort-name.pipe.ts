@@ -8,7 +8,7 @@ export class SortNamePipe implements PipeTransform {
 
   transform(value: Array<Task>, args?: any): Array<Task> {
     return value.sort((a, b) => {
-      if (a.name.toLowerCase > b.name.toLowerCase{
+      if (a.name.toLowerCase > b.name.toLowerCase) {
         return 1;
       } else {
         return -1;
