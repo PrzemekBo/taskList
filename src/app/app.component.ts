@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {TaskService} from './services/task.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,11 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'task-list-app';
+  constructor(private tasksService: TaskService) {
 
+  }
 
+  save() {
+    this.tasksService.saveTasksInDb();
+  }
 }

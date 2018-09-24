@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Task} from '../model/task';
+import {HttpService} from './http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,10 @@ export class TaskService {
   private tasksListObs = new BehaviorSubject<Array<Task>>([]);
 
 
-  constructor() {
-
-    const tasksList = [
-      {name: 'Sprzątanie kuwety', created: new Date().toLocaleString(), isDone: false},
-      {name: 'Nauka Angulara', created: new Date().toLocaleString(), isDone: false},
-      {name: 'Podlewanie kwiatów', created: new Date().toLocaleString(), isDone: false},
-      {name: 'Zakupy', created: new Date().toLocaleString(), isDone: false}
-    ];
-    this.tasksListObs.next(tasksList);
+  constructor(private httpService: HttpService) {
+    this.httpService.getTasks().subscribe(list => {
+      this.tasksListObs.next(list);
+    });
   }
 
   add(task: Task) {
@@ -43,6 +39,10 @@ export class TaskService {
   getTasksListObs(): Observable<Array<Task>> {
     return this.tasksListObs.asObservable();
   }
+  saveTasksInDb() {
+    this.httpService.saveTasks(this.tasksListObs.getValue());
+  }
+
 
 
 }
