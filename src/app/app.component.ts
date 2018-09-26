@@ -7,11 +7,9 @@ import {TaskService} from './services/task.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private tasksService: TaskService) {
+  constructor() {
 
   }
 
-  save() {
-    this.tasksService.saveTasksInDb();
-  }
+
 }

@@ -3,3 +3,9 @@
 body{
   background-color: darkgrey;
 }
+
+.container{
+  justify-content: center;
+  display: grid;
+  padding: 20px;
+}

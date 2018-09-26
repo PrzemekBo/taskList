@@ -14,6 +14,8 @@ import {TransformPipePipe} from './shared/transform-pipe.pipe';
 import {SortNamePipe} from './shared/sort-name.pipe';
 import {HttpService} from './services/http.service';
 import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app.routing.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,15 @@ import {HttpClientModule} from '@angular/common/http';
     CheckedDirective,
     DateDirective,
     TransformPipePipe,
-    SortNamePipe
+    SortNamePipe,
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [TaskService, HttpService],
   bootstrap: [AppComponent]
